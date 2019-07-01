@@ -1,1 +1,2 @@
-# coverage_and_mapped
+#### After cloning repo, install git-lfs: sudo apt install git-lfs
+#### 
