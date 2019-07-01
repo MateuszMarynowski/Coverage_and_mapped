@@ -1,4 +1,4 @@
-- Clone repo: **git clone https://github.com/MateuszMarynowski/coverage_and_mapped.git**
 - Install Git LFS: **sudo apt install git-lfs**
 - Type **git lfs install** to initialize Git LFS
+- Clone repo: **git clone https://github.com/MateuszMarynowski/coverage_and_mapped.git**
 - Type **java -jar cromwell-43.jar run myWorkflow.wdl -i myWorkflow.json**
