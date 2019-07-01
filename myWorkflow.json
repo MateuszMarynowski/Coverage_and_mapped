@@ -1,0 +1,4 @@
+{
+	"bam_file.cov_and_map.input_file": "Data/HG00096.chrom11.ILLUMINA.bwa.GBR.exome.20120522.bam",
+	"bam_file.cov_and_map.output_file": "cov_and_map.json"
+}
