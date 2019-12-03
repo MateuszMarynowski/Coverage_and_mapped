@@ -46,7 +46,7 @@ task report_coverage_stats {
   /opt/tools/generate-report.sh --json coverage=${coverage_stats_json} --template /opt/tools/templates/coverage-v1/content.xml
 
 
-  source <(curl -s https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/before-finish.sh)
+  source <(curl -s https://github.com/MateuszMarynowski/coverage_and_mapped/raw/master/before-finish.sh)
   >>>
 
   runtime {
