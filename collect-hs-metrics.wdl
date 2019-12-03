@@ -54,7 +54,7 @@ task collect_hs_metrics {
   aligned=`sed values.txt -n "30p"`
   bc -l <<< "$aligned / $all" > result
 
-  source <(curl -s https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/before-finish.sh)
+  source <(curl -s https://github.com/MateuszMarynowski/coverage_and_mapped/raw/master/before-finish.sh)
   >>>
 
   runtime {
