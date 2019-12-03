@@ -2,6 +2,8 @@ workflow merge_bco_workflow { call merge_bco {} }
 
 task merge_bco {
   Array[File] bcos
+  String module_name
+  String module_version
 
   # @Input(description="", required="false")
   String task_name = "merge_bco"
@@ -21,7 +23,7 @@ task merge_bco {
     biocomputeobject=$(jo -p\
       bco_spec_version="https://w3id.org/biocompute/1.3.0/" \
       bco_id="https://intelliseq.com/flow/fdb3091e-5420-46b9-b1f6-e6e88e94bac1" \
-      provenance_domain=$(jo name=alignment version=1.0 steps="$echo_provenance_domain") \
+      provenance_domain=$(jo name=${module_name} version=${module_version} steps="$echo_provenance_domain") \
       execution_domain="$echo_execution_domain" \
       parametric_domain="$echo_parametric_domain" \
     )
