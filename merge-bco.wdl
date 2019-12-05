@@ -12,8 +12,6 @@ task merge_bco {
 
   command <<<
   
-    mkdir bcos
-    ln -s ${sep=" " bcos} bcos
     provenance_domain=`jq -s '{ steps: map(.provenance_domain.steps[]) }' ${sep=" " bcos}`
     echo_provenance_domain=`echo $provenance_domain | jq '.steps'`
 
