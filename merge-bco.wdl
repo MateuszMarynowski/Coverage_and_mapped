@@ -11,6 +11,9 @@ task merge_bco {
   String docker_image = "intelliseqngs/ubuntu-minimal:18.04_v0.2"
 
   command <<<
+  
+    mkdir bcos
+    ln -s ${sep=" " bcos} bcos
     provenance_domain=`jq -s '{ steps: map(.provenance_domain.steps[]) }' ${sep=" " bcos}`
     echo_provenance_domain=`echo $provenance_domain | jq '.steps'`
 
