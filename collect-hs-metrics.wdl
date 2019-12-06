@@ -32,7 +32,7 @@ task collect_hs_metrics {
 
   command <<<
   task_name="${task_name}"; task_version="${task_version}"; task_docker="${docker_image}"
-  source <(curl -s https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/after-start.sh)
+  source <(curl -s https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/after-start.sh)
 
   java -jar /usr/picard/picard.jar CollectHsMetrics \
       I=${bam_file} \
