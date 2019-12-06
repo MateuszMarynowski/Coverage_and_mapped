@@ -4,6 +4,9 @@ task merge_bco {
   Array[File] bcos
   Array[Array[File]] bcos_scatter
   Array[File] bcos_scatter_flatten = flatten(bcos_scatter)
+  Array[File] stdout
+  Array[Array[File]] stdout_scatter
+  Array[File] stdout_scatter_flatten = flatten(stdout_scatter)
   String module_name
   String module_version
 
@@ -32,6 +35,8 @@ task merge_bco {
     )
 
     echo "$biocomputeobject" > bco.json
+    
+    cat ${sep=" " stdout} ${sep=" " stdout_scatter_flatten} > stdout
 
   >>>
 
