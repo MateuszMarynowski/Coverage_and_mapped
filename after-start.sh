@@ -1,4 +1,3 @@
 ### start time
 date +%s > starttime
-bold=$(tput bold)
-echo "${bold}$task_name"
+echo -e '\033[1m$task_name\033[0m'
