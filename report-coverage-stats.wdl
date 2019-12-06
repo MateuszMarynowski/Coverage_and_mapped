@@ -33,7 +33,7 @@ task report_coverage_stats {
 
   command <<<
   task_name="${task_name}"; task_version="${task_version}"; task_docker="${docker_image}"
-  source <(curl -s https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/after-start.sh)
+  source <(curl -s https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/after-start.sh)
 
   printf "{\
     \"task-name\":\"${task_name}\",\
