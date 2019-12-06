@@ -2,6 +2,8 @@ workflow merge_bco_workflow { call merge_bco {} }
 
 task merge_bco {
   Array[File] bcos
+  Array[Array[File] bcos_scatter
+  Array[File] bcos_scatter_flatten = flatten(bcos_scatter)
   String module_name
   String module_version
 
@@ -12,13 +14,13 @@ task merge_bco {
 
   command <<<
   
-    provenance_domain=`jq -s '{ steps: map(.provenance_domain.steps[]) }' ${sep=" " bcos}`
+    provenance_domain=`jq -s '{ steps: map(.provenance_domain.steps[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_provenance_domain=`echo $provenance_domain | jq '.steps'`
 
-    execution_domain=`jq -s '{ execution_domain: map(.execution_domain) }' ${sep=" " bcos}`
+    execution_domain=`jq -s '{ execution_domain: map(.execution_domain) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_execution_domain=`echo $execution_domain | jq '.execution_domain'`
 
-    parametric_domain=`jq -s '{ parametric_domain: map(.parametric_domain[]) }' ${sep=" " bcos}`
+    parametric_domain=`jq -s '{ parametric_domain: map(.parametric_domain[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_parametric_domain=`echo $parametric_domain | jq '.parametric_domain'`
 
     biocomputeobject=$(jo -p\
