@@ -1,3 +1,4 @@
 ### start time
 date +%s > starttime
-echo "$task_name"
+bold=$(tput bold)
+echo "${bold}$task_name"
