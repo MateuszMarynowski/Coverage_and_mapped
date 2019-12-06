@@ -2,7 +2,7 @@ workflow merge_bco_workflow { call merge_bco {} }
 
 task merge_bco {
   Array[File] bcos
-  Array[Array[File] bcos_scatter
+  Array[Array[File]] bcos_scatter
   Array[File] bcos_scatter_flatten = flatten(bcos_scatter)
   String module_name
   String module_version
