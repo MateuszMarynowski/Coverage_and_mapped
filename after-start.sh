@@ -1,3 +1,3 @@
 ### start time
 date +%s > starttime
-echo "$task_name"
+echo "${bold}$task_name"
