@@ -5,7 +5,7 @@ python3 bioobject.py
 python3 -m pip install --user miniwdl
 wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
 wget -O collect-hs-metrics.wdl https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/collect-hs-metrics.wdl
-python3 meta.py 'collect-hs-metrics.wdl'
+python3 meta.py collect-hs-metrics.wdl
 
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
