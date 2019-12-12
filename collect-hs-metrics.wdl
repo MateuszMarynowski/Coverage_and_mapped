@@ -31,7 +31,7 @@ task collect_hs_metrics {
   String docker_image = "intelliseqngs/picard:v2.21.4"
 
   command <<<
-  pip3 install miniwdl
+  pip install miniwdl
   task_name="${task_name}"; task_version="${task_version}"; task_docker="${docker_image}"
   source <(curl -s https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/after-start.sh)
 
