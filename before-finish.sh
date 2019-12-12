@@ -2,6 +2,10 @@
 wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/versions.py
 python3 bioobject.py
 
+wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
+wget -O collect-hs-metrics.wdl https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/collect-hs-metrics.wdl
+python3 meta.py 'collect-hs-metrics.wdl'
+
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
 memory=$(cat /proc/meminfo | grep MemTotal | grep -o '[0-9]*' |  awk '{ print $1/1024/1024 ; exit}')
