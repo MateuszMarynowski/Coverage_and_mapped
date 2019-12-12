@@ -5,14 +5,14 @@ workflow collect_hs_metrics_workflow {
     author: 'https://gitlab.com/mremre'
     copyright: 'Copyright 2019 Intelliseq'
     description: 'Collects coverage metrics using picard tool.'
-    changes: '{"latest": "no changes"}'
-    input_intervals: '{"name": "intervals", "type": "File", "extension": "interval_list", "description": "interval list"}'
-    input_bam: '{"name": "bam", "type": "File", "extension": "bam", "description": "Alignment result"}'
-    input_bai: '{"name": "bai", "type": "File", "extension": "bai", "description": "Alignment result index"}'
-    output_hs_metrics_json: '{"name": "hs_metrics_json", "type": "File", "copy": "True", "description": "json with hs metrics"}'
-    output_stdout_log: '{"name": "Standard out", "type": "File", "copy": "True", "description": "Console output"}'
-    output_stderr_err: '{"name": "Standard err", "type": "File", "copy": "True", "description": "Console stderr"}'
-    output_bco: '{"name": "Biocompute object", "type": "File", "copy": "True", "description": "Biocompute object"}'
+    changes: {"latest": "no changes"}
+    input_intervals: {"name": "intervals", "type": "File", "extension": "interval_list", "description": "interval list"}
+    input_bam: {"name": "bam", "type": "File", "extension": "bam", "description": "Alignment result"}
+    input_bai: {"name": "bai", "type": "File", "extension": "bai", "description": "Alignment result index"}
+    output_hs_metrics_json: {"name": "hs_metrics_json", "type": "File", "copy": "True", "description": "json with hs metrics"}
+    output_stdout_log: {"name": "Standard out", "type": "File", "copy": "True", "description": "Console output"}
+    output_stderr_err: {"name": "Standard err", "type": "File", "copy": "True", "description": "Console stderr"}
+    output_bco: {"name": "Biocompute object", "type": "File", "copy": "True", "description": "Biocompute object"}
   }
 
   call collect_hs_metrics
