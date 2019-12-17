@@ -2,6 +2,9 @@
 wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/versions.py
 python3 bioobject.py
 
+### task_name change "_" to "-"
+task_name=$(echo "$task_name" | sed -r 's/_/-/g')
+
 ### meta_data
 python3 -m pip install --user miniwdl
 wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
