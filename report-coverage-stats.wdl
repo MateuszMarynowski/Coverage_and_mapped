@@ -7,7 +7,7 @@ workflow report_coverage_stats_workflow {
     description: '## report_coverage_stats \n Generic text for task'
     changes: '{"latest": "no changes"}'
 
-    input_coverage_stats_json: '{name: "coverage_stats_json", type: "File", constraints: {extension: ["json"]}}'
+    input_coverage_stats_json: '{"name": "coverage_stats_json", "type": "File", "constraints": {"extension": ["json"]}}'
 
     output_coverage_report_pdf: '{"name": "coverage_report_pdf", "type": "File", "copy": "True", "description": "Coverage statistics report in pdf file", *constraints: {extension: ["pdf"]}}'
     output_coverage_report_odt: '{"name": "coverage_report_odt", "type": "File", "copy": "True", "description": "Coverage statistics report in odt file", *constraints: {extension: ["odt"]}}'
