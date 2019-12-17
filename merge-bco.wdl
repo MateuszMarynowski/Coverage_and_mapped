@@ -35,7 +35,7 @@ task merge_bco {
       provenance_domain=$(jo name=${module_name} version=${module_version} steps="$echo_provenance_domain") \
       execution_domain="$echo_execution_domain" \
       parametric_domain="$echo_parametric_domain" \
-      description_domain="$echo_description_domain" \
+      description_domain=$(jo pipeline_steps="$echo_description_domain") \
     )
 
     echo "$biocomputeobject" > bco.json
