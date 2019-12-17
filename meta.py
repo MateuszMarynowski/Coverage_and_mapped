@@ -26,5 +26,6 @@ meta = str(doc.workflow.meta)
 meta = meta.replace("'{", "{")
 meta = meta.replace("}'", "}")
 meta = meta.replace("'", '"')
+meta = json.loads(meta.replace("\'", '"'))
 with open('meta.json', 'w') as outfile:
     json.dump(meta, outfile)
