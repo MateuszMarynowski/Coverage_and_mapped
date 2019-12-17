@@ -2,10 +2,14 @@
 wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/versions.py
 python3 bioobject.py
 
+### meta_data
 python3 -m pip install --user miniwdl
 wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
-wget -O collect-hs-metrics.wdl https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/collect-hs-metrics.wdl
-python3 meta.py 'collect-hs-metrics.wdl'
+./meta.py 'https://gitlab.com/intelliseq/workflows/raw/master/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl'
+
+### description_domain
+pipeline_steps=$(jo -a "$(cat meta.json)")
+description_domain=$(jo -p pipeline_steps="$pipeline_steps")
 
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
@@ -48,6 +52,7 @@ biocomputeobject=$(jo -p \
   provenance_domain="$provenance_domain" \
   execution_domain="$execution_domain" \
   parametric_domain="$parametric_domain" \
+  description_domain="$description_domain" \
 )
 
 echo "$biocomputeobject" > bco.json
