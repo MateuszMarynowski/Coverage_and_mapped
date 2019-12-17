@@ -35,7 +35,7 @@ provenance_domain=$(jo -p \
 )
 
 execution_domain=$(jo -p \
-  script="https://gitlab.com/intelliseq/workflows/raw/master/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl" \
+  script="https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl" \
   script_driver="shell" \
   software_prerequisites="$software_prerequisites" \
   external_data_endpoints="$external_data_endpoints" \
