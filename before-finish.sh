@@ -5,7 +5,7 @@ python3 bioobject.py
 ### meta_data
 python3 -m pip install --user miniwdl
 wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
-./meta.py 'https://gitlab.com/intelliseq/workflows/raw/master/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl'
+python3 meta.py 'https://gitlab.com/intelliseq/workflows/raw/master/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl'
 
 ### description_domain
 pipeline_steps=$(jo -a "$(cat meta.json)")
