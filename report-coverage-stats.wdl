@@ -27,7 +27,7 @@ task report_coverage_stats {
   File coverage_stats_json
   String index
 
-  String task_name = "report_coverage_stats_" + index
+  String task_name = "report_coverage_stats"
   String task_version = "latest"
   String docker_image = "intelliseqngs/reports:v0.3"
 
