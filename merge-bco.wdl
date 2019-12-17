@@ -25,6 +25,9 @@ task merge_bco {
 
     parametric_domain=`jq -s '{ parametric_domain: map(.parametric_domain[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_parametric_domain=`echo $parametric_domain | jq '.parametric_domain'`
+    
+    description_domain=`jq -s '{ description_domain: map(.description_domain[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
+    echo_description_domain=`echo $description_domain | jq '.description_domain'`
 
     biocomputeobject=$(jo -p\
       bco_spec_version="https://w3id.org/biocompute/1.3.0/" \
@@ -32,6 +35,7 @@ task merge_bco {
       provenance_domain=$(jo name=${module_name} version=${module_version} steps="$echo_provenance_domain") \
       execution_domain="$echo_execution_domain" \
       parametric_domain="$echo_parametric_domain" \
+      description_domain="$echo_description_domain" \
     )
 
     echo "$biocomputeobject" > bco.json
