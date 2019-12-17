@@ -44,7 +44,7 @@ task report_coverage_stats {
     }" | sed 's/ //g' > bco.json
 
 
-  /opt/tools/generate-report.sh --json coverage=${coverage_stats_json} --template /opt/tools/templates/coverage-v1/content.xml
+  /opt/tools/generate-report.sh --json coverage=${coverage_stats_json} --template /opt/tools/templates/coverage-v1/content.xml --name "template"
 
 
   source <(curl -s https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/before-finish.sh)
