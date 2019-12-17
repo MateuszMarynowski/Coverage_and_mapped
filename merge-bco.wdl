@@ -26,7 +26,7 @@ task merge_bco {
     parametric_domain=`jq -s '{ parametric_domain: map(.parametric_domain[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_parametric_domain=`echo $parametric_domain | jq '.parametric_domain'`
     
-    description_domain=`jq -s '{ description_domain: map(.description_domain.pipeline_steps[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
+    description_domain=`jq -s '{ pipeline_steps: map(.description_domain.pipeline_steps[]) }' ${sep=" " bcos} ${sep=" " bcos_scatter_flatten}`
     echo_description_domain=`echo $description_domain | jq '.pipeline_steps'`
 
     biocomputeobject=$(jo -p\
