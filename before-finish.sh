@@ -8,7 +8,7 @@ task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 ### meta_data
 python3 -m pip install --user miniwdl
 wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
-python3 meta.py 'https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl'
+python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
 
 ### description_domain
 pipeline_steps=$(jo -a "$(cat meta.json)")
