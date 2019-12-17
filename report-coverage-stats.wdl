@@ -9,10 +9,10 @@ workflow report_coverage_stats_workflow {
 
     input_coverage_stats_json: '{"name": "coverage_stats_json", "type": "File", "constraints": {"extension": ["json"]}}'
 
-    output_coverage_report_pdf: '{"name": "coverage_report_pdf", "type": "File", "copy": "True", "description": "Coverage statistics report in pdf file", *constraints: {extension: ["pdf"]}}'
-    output_coverage_report_odt: '{"name": "coverage_report_odt", "type": "File", "copy": "True", "description": "Coverage statistics report in odt file", *constraints: {extension: ["odt"]}}'
-    output_coverage_report_docx: '{"name": "coverage_report_docx", "type": "File", "copy": "True", "description": "Coverage statistics report in docx file", *constraints: {extension: ["docx"]}}'
-    output_coverage_report_html: '{"name": "coverage_report_html", "type": "File", "copy": "True", "description": "Coverage statistics report in html file", *constraints: {extension: ["html"]}}'
+    output_coverage_report_pdf: '{"name": "coverage_report_pdf", "type": "File", "copy": "True", "description": "Coverage statistics report in pdf file", "constraints": {"extension": ["pdf"]}}'
+    output_coverage_report_odt: '{"name": "coverage_report_odt", "type": "File", "copy": "True", "description": "Coverage statistics report in odt file", "constraints": {"extension": ["odt"]}}'
+    output_coverage_report_docx: '{"name": "coverage_report_docx", "type": "File", "copy": "True", "description": "Coverage statistics report in docx file", "constraints": {"extension": ["docx"]}}'
+    output_coverage_report_html: '{"name": "coverage_report_html", "type": "File", "copy": "True", "description": "Coverage statistics report in html file", "constraints": {"extension": ["html"]}}'
     output_stdout_log: '{"name": "Standard out", "type": "File", "copy": "True", "description": "Console output"}'
     output_stderr_err: '{"name": "Standard err", "type": "File", "copy": "True", "description": "Console stderr"}'
     output_bco: '{"name": "Biocompute object", "type": "File", "copy": "True", "description": "Biocompute object"}'
