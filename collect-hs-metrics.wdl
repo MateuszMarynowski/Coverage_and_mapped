@@ -2,18 +2,19 @@ workflow collect_hs_metrics_workflow {
 
   meta {
     name: 'Collect coverage metrics'
-    author: 'https://gitlab.com/mremre'
+    author: 'https://gitlab.com/mremre, https://gitlab.com/moni.krzyz'
     copyright: 'Copyright 2019 Intelliseq'
-    description: 'Collects coverage metrics using picard tool.'
+    description: 'Collects coverage metrics using gatk and samtools.'
     changes: '{"latest": "no changes"}'
     input_intervals: '{"name": "intervals", "type": "File", "extension": "interval_list", "description": "interval list"}'
     input_bam: '{"name": "bam", "type": "File", "extension": "bam", "description": "Alignment result"}'
     input_bai: '{"name": "bai", "type": "File", "extension": "bai", "description": "Alignment result index"}'
-    output_hs_metrics_json: '{"name": "hs_metrics_json.json", "type": "File", "copy": "True", "description": "json with hs metrics"}'
+    output_final_json: '{"name": "final_json.json", "type": "File", "copy": "True", "description": "json with coverage statistics metrics"}'
+    output_simple_json: '{"name": "simple_json.json", "type": "File", "copy": "True", "description": "json with human readable coverage statistics metrics"}'
     output_stdout_log: '{"name": "Standard out", "type": "File", "copy": "True", "description": "Console output"}'
     output_stderr_err: '{"name": "Standard err", "type": "File", "copy": "True", "description": "Console stderr"}'
     output_bco: '{"name": "Biocompute object", "type": "File", "copy": "True", "description": "Biocompute object"}'
-  }
+  }}
 
   call collect_hs_metrics
 
