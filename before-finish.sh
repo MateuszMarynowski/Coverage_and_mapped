@@ -11,7 +11,17 @@ wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and
 python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
 
 ### description_domain
-pipeline_steps=$(jo -a "$(cat meta.json)")
+task_info=$(jq '. | with_entries(select(.key | contains("input") | not) | select(.key | contains("output") | not))' meta.json)
+
+inputs=$(jq '. | [.[keys[] | select(contains("input"))]]' meta.json)
+inputs=$(jo -a "$inputs")
+
+outputs=$(jq '. | [.[keys[] | select(contains("output"))]]' meta.json) 
+outputs=$(jo -a "$outputs")
+
+taskinfo_inputs_outputs=$(jo -p task_info="$task_info" input_list="$inputs" output_list="$outputs")
+
+pipeline_steps=$(jo -a "$taskinfo_inputs_outputs")
 description_domain=$(jo -p pipeline_steps="$pipeline_steps")
 
 ### bioobject
