@@ -14,7 +14,7 @@ workflow collect_hs_metrics_workflow {
     output_stdout_log: '{"name": "Standard out", "type": "File", "copy": "True", "description": "Console output"}'
     output_stderr_err: '{"name": "Standard err", "type": "File", "copy": "True", "description": "Console stderr"}'
     output_bco: '{"name": "Biocompute object", "type": "File", "copy": "True", "description": "Biocompute object"}'
-  }}
+  }
 
   call collect_hs_metrics
 
