@@ -1,7 +1,7 @@
 workflow collect_hs_metrics_workflow {
 
   meta {
-    keywords: '{"gatk": true, "samtools": true, "coverage metrics": true}'
+    keywords: '{"gatk": "True", "samtools": "True", "coverage metrics": "True"}'
     name: 'Collect coverage metrics'
     author: 'https://gitlab.com/mremre, https://gitlab.com/moni.krzyz'
     copyright: 'Copyright 2019 Intelliseq'
