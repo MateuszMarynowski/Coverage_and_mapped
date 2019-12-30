@@ -1,7 +1,7 @@
 workflow report_coverage_stats_workflow {
 
   meta {
-    keywords: '["gatk": true, "samtools": true, "coverage metrics": true]'
+    keywords: '{"gatk", "samtools", "coverage metrics"}'
     name: 'report_coverage_stats'
     author: 'https://gitlab.com/marysiaa'
     copyright: 'Copyright 2019 Intelliseq'
