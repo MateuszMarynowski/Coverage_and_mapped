@@ -1,7 +1,7 @@
 workflow report_coverage_stats_workflow {
 
   meta {
-    keywords: '["report", "coverage_report"]'
+    keywords: '[report, coverage_report]'
     name: 'report_coverage_stats'
     author: 'https://gitlab.com/marysiaa'
     copyright: 'Copyright 2019 Intelliseq'
