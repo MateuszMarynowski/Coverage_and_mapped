@@ -6,23 +6,18 @@ python3 bioobject.py
 task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 
 ### meta_data
-python3 -m pip install --user miniwdl
-wget -O meta.py https://raw.githubusercontent.com/MateuszMarynowski/coverage_and_mapped/master/meta.py
+wget -O meta.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v2/meta.py
 python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
 
 ### description_domain
-task_info=$(jq '. | with_entries(select(.key | contains("input") | not) | select(.key | contains("output") | not))' meta.json)
-
+task_info=$(jq '. | with_entries(select(.key | contains("input") | not) | select(.key | contains("output") | not) | select(.key | contains("keywords") | not))' meta.json)
 inputs=$(jq '. | [.[keys[] | select(contains("input"))]]' meta.json)
-inputs=$(jo -a "$inputs")
-
-outputs=$(jq '. | [.[keys[] | select(contains("output"))]]' meta.json) 
-outputs=$(jo -a "$outputs")
-
-taskinfo_inputs_outputs=$(jo -p task_info="$task_info" input_list="$inputs" output_list="$outputs")
-
-pipeline_steps=$(jo -a "$taskinfo_inputs_outputs")
-description_domain=$(jo -p pipeline_steps="$pipeline_steps")
+outputs=$(jq '. | [.[keys[] | select(contains("output"))]]' meta.json)
+keywords=$(jq -s '{ keywords: map(.keywords.keywords[]) }' meta.json)
+echo_keywords=`echo $keywords | jq '.keywords'`
+task_info_inputs_outputs=$(jo -p task_info="$task_info" input_list="$inputs" output_list="$outputs")
+pipeline_steps=$(jo -a "$task_info_inputs_outputs")
+description_domain=$(jo -p keywords="$echo_keywords" pipeline_steps="$pipeline_steps")
 
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
@@ -39,7 +34,7 @@ if [ "$(ls -A $datasource*.bco)" ]; then
   external_data_endpoints=$(tools="[]"; for toolfile in $(ls datasource*.bco); do tools=$(echo $tools | jq ". + [$(cat $toolfile)]") ; done; echo $tools)
 fi
 
-step=$(jo name="$task_name" version="$task_version")
+step=$(jo name="$task_name_with_index" version="$task_version")
 provenance_domain=$(jo -p \
     steps=$(jo -a $step) \
 )
@@ -49,13 +44,13 @@ execution_domain=$(jo -p \
   script_driver="shell" \
   software_prerequisites="$software_prerequisites" \
   external_data_endpoints="$external_data_endpoints" \
-  name="$task_name" \
+  name="$task_name_with_index" \
 )
 
-CPU=$(jo param=cpu value=$cpu name="$task_name")
-MEMORY=$(jo param=memory value=$memory name="$task_name")
-TASKTIME=$(jo param=tasktime value=$tasktime name="$task_name")
-DOCKER=$(jo param=docker_image value=$task_docker name="$task_name")
+CPU=$(jo param=cpu value=$cpu name="$task_name_with_index")
+MEMORY=$(jo param=memory value=$memory name="$task_name_with_index")
+TASKTIME=$(jo param=tasktime value=$tasktime name="$task_name_with_index")
+DOCKER=$(jo param=docker_image value=$task_docker name="$task_name_with_index")
 
 parametric_domain=$(jo -a $CPU $MEMORY $TASKTIME $DOCKER)
 
