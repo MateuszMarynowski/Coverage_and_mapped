@@ -8,7 +8,7 @@ task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 ### meta_data
 wget -O meta.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v2/meta.py
 python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
-jq -r --arg TASK_NAME_WITH_INDEX "$task_name_with_index" '.name = $TASK_NAME_WITH_INDEX' meta.json
+jq -r --arg TASK_NAME_WITH_INDEX "$task_name_with_index" '.name = $TASK_NAME_WITH_INDEX' meta.json >meta.json.tmp && mv meta.json.tmp meta.json
 
 ### description_domain
 task_info=$(jq '. | with_entries(select(.key | contains("input") | not) | select(.key | contains("output") | not) | select(.key | contains("keywords") | not))' meta.json)
