@@ -1,4 +1,4 @@
-### bioobject
+### bioobjecty
 wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/versions.py
 python3 bioobject.py
 
