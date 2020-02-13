@@ -5,6 +5,12 @@ python3 bioobject.py
 ### task_name change "_" to "-"
 task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 
+if [ $# -gt 0 ]; then
+    echo "Your command line contains $# arguments"
+else
+    echo "Your command line contains no arguments"
+fi
+
 echo $@ > test.txt
 
 ### meta_data
