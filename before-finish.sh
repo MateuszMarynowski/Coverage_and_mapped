@@ -5,6 +5,8 @@ python3 bioobject.py
 ### task_name change "_" to "-"
 task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 
+echo $1
+
 ### meta_data
 wget -O meta.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v2/meta.py
 python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/$1/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
