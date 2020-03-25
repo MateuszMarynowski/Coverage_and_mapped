@@ -1,21 +1,13 @@
-### bioobjectyyyyy
-wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v1/versions.py
+### bioobject
+wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/1.0.0/versions.py
 python3 bioobject.py
 
 ### task_name change "_" to "-"
 task_name=$(echo "$task_name" | sed -r 's/_/-/g')
 
-if [ $# -gt 0 ]; then
-    echo "Your command line contains $# arguments"
-else
-    echo "Your command line contains no arguments"
-fi
-
-echo $@ > test.txt
-
 ### meta_data
-wget -O meta.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/v2/meta.py
-python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/$1/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
+wget -O meta.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/1.0.0/meta.py
+python3 meta.py "https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl"
 jq -r --arg TASK_NAME_WITH_INDEX "$task_name_with_index" '.name = $TASK_NAME_WITH_INDEX' meta.json >meta.json.tmp && mv meta.json.tmp meta.json
 
 ### description_domain
@@ -31,12 +23,13 @@ description_domain=$(jo -p keywords="$echo_keywords" pipeline_steps="$pipeline_s
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
 memory=$(cat /proc/meminfo | grep MemTotal | grep -o '[0-9]*' |  awk '{ print $1/1024/1024 ; exit}')
+docker_size=$(du -ach | tail -n 1 | awk 'NR==1{print $1}')
 finishtime=$(date +%s)
 starttime=$(cat starttime)
 tasktime=$((finishtime-starttime))
 
 os_name=$(cat /etc/os-release | grep -e "^NAME" | grep -o "\".*\"" | sed 's/"//g')
-os_version=$(cat /etc/os-release | grep -e "^VERSION" | grep -o "\".*\"" | sed 's/"//g')
+os_version=$(cat /etc/os-release | grep -e "^VERSION_ID" | grep -o "\".*\"" | sed 's/"//g')
 jo -p name=$os_name version=$os_version > software_ubuntu.bco
 software_prerequisites=$(tools="[]"; for toolfile in $(ls software*.bco); do tools=$(echo $tools | jq ". + [$(cat $toolfile)]") ; done; echo $tools)
 if [ "$(ls -A $datasource*.bco)" ]; then
@@ -49,7 +42,7 @@ provenance_domain=$(jo -p \
 )
 
 execution_domain=$(jo -p \
-  script="https://gitlab.com/intelliseq/workflows/raw/$1/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl" \
+  script="https://gitlab.com/intelliseq/workflows/raw/dev/src/main/wdl/tasks/$task_name/$task_version/$task_name.wdl" \
   script_driver="shell" \
   software_prerequisites="$software_prerequisites" \
   external_data_endpoints="$external_data_endpoints" \
@@ -60,8 +53,9 @@ CPU=$(jo param=cpu value=$cpu name="$task_name_with_index")
 MEMORY=$(jo param=memory value=$memory name="$task_name_with_index")
 TASKTIME=$(jo param=tasktime value=$tasktime name="$task_name_with_index")
 DOCKER=$(jo param=docker_image value=$task_docker name="$task_name_with_index")
+DOCKER_SIZE=$(jo param=docker_size value=$docker_size name="$task_name_with_index")
 
-parametric_domain=$(jo -a $CPU $MEMORY $TASKTIME $DOCKER)
+parametric_domain=$(jo -a $CPU $MEMORY $TASKTIME $DOCKER $DOCKER_SIZE)
 
 biocomputeobject=$(jo -p \
   bco_spec_version="https://w3id.org/biocompute/1.3.0/" \
