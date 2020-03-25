@@ -23,7 +23,7 @@ description_domain=$(jo -p keywords="$echo_keywords" pipeline_steps="$pipeline_s
 ### bioobject
 cpu=$(lscpu | grep '^CPU(s)' | grep -o '[0-9]*')
 memory=$(cat /proc/meminfo | grep MemTotal | grep -o '[0-9]*' |  awk '{ print $1/1024/1024 ; exit}')
-docker_size=$(du -ach | tail -n 1 | awk 'NR==1{print $1}')
+docker_size=$(du -ach / | tail -n 1 | awk 'NR==1{print $1}')
 finishtime=$(date +%s)
 starttime=$(cat starttime)
 tasktime=$((finishtime-starttime))
