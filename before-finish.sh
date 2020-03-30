@@ -1,4 +1,4 @@
->&2 echo "###### stderr for before finish script - start ######"
+>&2 echo -e "\n###### stderr for before finish script - start ######\n"
 
 ### bioobject
 wget -O bioobject.py https://gitlab.com/intelliseq/workflows/raw/dev/src/main/scripts/bco/1.0.0/versions.py
