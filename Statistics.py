@@ -23,7 +23,6 @@ percentage = (float(mapped)/total)*100
 coverage_sum = 0
 for pileupcolumn in bamfile.pileup():
     coverage_sum += pileupcolumn.n
-
 # Average coverage
 coverage = float(coverage_sum)/total
 
